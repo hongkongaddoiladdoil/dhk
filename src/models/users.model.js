@@ -1,23 +1,25 @@
 /* eslint-disable no-console */
 
-// login-model.js - A KnexJS
-// 
+// users-model.js - A KnexJS
+//
 // See http://knexjs.org/
 // for more of what you can do here.
 module.exports = function (app) {
   const db = app.get('knexClient');
-  const tableName = 'login';
+  const tableName = 'users';
   db.schema.hasTable(tableName).then(exists => {
     if(!exists) {
       db.schema.createTable(tableName, table => {
         table.increments('id');
-        table.string('text');
+        table.string('username');
+        table.string('password_hash');
+        table.timestamp('created_at').defaultTo(db.fn.now());
       })
         .then(() => console.log(`Created ${tableName} table`))
         .catch(e => console.error(`Error creating ${tableName} table`, e));
     }
   });
-  
+
 
   return db;
 };

@@ -10,6 +10,7 @@ module.exports = {
       user:     'postgres',
       password: '2019'
     },
+    useNullAsDefault: true,
     pool: {
       min: 2,
       max: 10
