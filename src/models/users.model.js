@@ -11,15 +11,20 @@ module.exports = function (app) {
     if(!exists) {
       db.schema.createTable(tableName, table => {
         table.increments('id');
-        table.string('username');
-        table.string('password_hash');
-        table.timestamp('created_at').defaultTo(db.fn.now());
+        table.string('email').unique();
+        table.string('password');
+        table.boolean('isVerified');
+        table.string('verifyToken');
+        table.date('verifyExpires');
+        table.json('verifyChanges');
+        table.string('resetToken');
+        table.date('resetExpires');
+
       })
         .then(() => console.log(`Created ${tableName} table`))
         .catch(e => console.error(`Error creating ${tableName} table`, e));
     }
   });
-
 
   return db;
 };
