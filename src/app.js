@@ -10,20 +10,21 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-
+const router = express.Router();
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
-
 const knex = require('./knex');
 
 const authentication = require('./authentication');
 
 const app = express(feathers());
-
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
 // Load app configuration
 app.configure(configuration());
+// app.configure(configuration(path.join(__dirname, '..')));
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet());
 app.use(cors());
@@ -33,6 +34,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+// app.use(express.static(path.join(__dirname, 'public')))
+
+// router.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public', 'index.html'));
+// });
+// app.use('/', router);
+
+// app.use('*',(req, res) => {
+// });
 
 // Set up Plugins and providers
 app.configure(express.rest());
