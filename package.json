@@ -39,11 +39,14 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "feathers-knex": "^6.0.1",
+    "feathers-sequelize": "^4.1.1",
     "helmet": "^3.20.0",
     "knex": "^0.19.1",
     "pg": "^7.12.1",
+    "sequelize": "^4.44.2",
     "serve-favicon": "^2.5.0",
     "sqlite3": "^4.0.9",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {

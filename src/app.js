@@ -18,6 +18,8 @@ const channels = require('./channels');
 
 const knex = require('./knex');
 
+const sequelize = require('./sequelize');
+
 const app = express(feathers());
 
 // Load app configuration
@@ -38,6 +40,8 @@ app.configure(socketio());
 
 app.configure(knex);
 
+app.configure(sequelize);
+
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 // Set up our services (see `services/index.js`)
@@ -51,4 +55,13 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
+const uuidv4 = require('uuid/v4');
+app.service('app-user').create({
+    id: uuidv4(),
+    username: 'joey',
+    display_name: 'joey yung'
+  })
+  .then(app_user => console.log(app_user));
+
+  
 module.exports = app;
